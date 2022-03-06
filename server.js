@@ -68,7 +68,10 @@ fs.readFile("./users.json", (err, data) => {
         }
     });
 });
-
+server.get('/users',(req,res)=>{
+  var b = userdb.get('users').value();
+  res.send(b);
+})
 // Create token for new user
   const access_token = createToken({email, password})
   console.log("Access Token:" + access_token);
@@ -76,7 +79,7 @@ fs.readFile("./users.json", (err, data) => {
 })
 
 // Login to one of the users from ./users.json
-server.post('/api/auth/login', (req, res) => {
+server.post('/auth/login', (req, res) => {
   console.log("login endpoint called; request body:");
   console.log(req.body);
   const {email, password} = req.body;
